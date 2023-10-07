@@ -4,7 +4,7 @@ name: 08 Build and Unit Test
 on:
   push:
     branches:
-      - main
+      - none
   pull_request:
 
 jobs:
@@ -48,7 +48,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v5
         with:
-          images: bretfisher/docker-ci-automation
+          images: dianini/automation
           flavor: |
             latest=false
           tags: |
