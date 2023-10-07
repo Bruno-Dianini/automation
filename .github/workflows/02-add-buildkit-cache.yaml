@@ -4,7 +4,7 @@ name: 02 Build with BuildKit Cache
 on:
   push:
     branches:
-      - main
+      - none
   pull_request:
 
 jobs:
