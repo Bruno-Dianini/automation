@@ -40,12 +40,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GIT_TOKEN }}
       
+      - name: Debug
+        run: |
+          echo "GitHub Actor: ${{ github.actor }}"
+          echo "GitHub Token: ${{ secrets.GIT_TOKEN }}" # ou substitua pelo nome correto do segredo
+
       - name: Build and Push to GHCR
         uses: docker/build-push-action@v5
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GIT_TOKEN }}
           push: true
           tags: ghcr.io/dianini/automation:${{ github.run_id }}
           target: test
@@ -60,6 +62,11 @@ jobs:
             --agents 1
             --no-lb
             --k3s-arg "--no-deploy=traefik,servicelb,metrics-server@server:*"
+      
+      - name: Debug
+        run: |
+          echo "GitHub Actor: ${{ github.actor }}"
+          echo "GitHub Token: ${{ secrets.GIT_TOKEN }}" # ou substitua pelo nome correto do segredo      
       
       - name: Smoke test deployment in k3d Kubernetes
         run: |
