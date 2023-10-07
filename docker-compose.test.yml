@@ -1,23 +1,49 @@
+version: '3.8'  # Versão do Docker Compose
+
 services:
   allhands22:
     image: "${TESTING_IMAGE}"
-  
+    container_name: allhands22
+    ports:
+      - "80:80"  # Mapeia a porta 80 do contêiner para a porta 80 do host
+    networks:
+      - mynetwork  # Cria uma rede personalizada para comunicação entre serviços
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://allhands22:80"]
+      interval: 5s
+      retries: 3
+      timeout: 10s
+
   postgres:
     image: postgres
+    container_name: postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
       - ./healthchecks:/healthchecks
+    ports:
+      - "5432:5432"  # Mapeia a porta 5432 do contêiner para a porta 5432 do host
+    networks:
+      - mynetwork  # Usa a mesma rede personalizada
     healthcheck:
-      test: /healthchecks/postgres-healthcheck
-      interval: "5s"
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      retries: 3
+      timeout: 10s
+
   sut:
     image: "${TESTING_IMAGE}"
+    container_name: sut
     depends_on:
       allhands22:
-        condition: service_started
+        condition: service_healthy  # Aguarde até que o serviço "allhands22" esteja saudável
       postgres:
-        condition: service_healthy
-    # run all your tests here against the allhands22 service
+        condition: service_healthy  # Aguarde até que o serviço "postgres" esteja saudável
     command: curl --fail http://allhands22:80 || exit 1
+    networks:
+      - mynetwork  # Usa a mesma rede personalizada
+
+networks:
+  mynetwork:
+
