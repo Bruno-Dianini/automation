@@ -4,7 +4,7 @@ name: 03 Build with Multi-Platform
 on:
   push:
     branches:
-      - main
+      - none
   pull_request:
 
 jobs:
