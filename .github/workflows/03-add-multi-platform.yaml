@@ -4,7 +4,7 @@ name: 03 Build with Multi-Platform
 on:
   push:
     branches:
-      - main
+      - none
   pull_request:
 
 jobs:
@@ -31,7 +31,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: ${{ github.event_name != 'pull_request' }}
-          tags: bretfisher/docker-ci-automation:03
+          tags: dianini/automation:03
           cache-from: type=gha
           cache-to: type=gha,mode=max
 #NEW: (START) ##########################################################
