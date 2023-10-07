@@ -4,7 +4,7 @@ name: 09 Build and Integration Test
 on:
   push:
     branches:
-      - main
+      - none
   pull_request:
 
 jobs:
