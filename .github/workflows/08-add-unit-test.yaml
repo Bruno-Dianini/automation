@@ -4,7 +4,7 @@ name: 08 Build and Unit Test
 on:
   push:
     branches:
-      - none
+      - main
   pull_request:
 
 jobs:
