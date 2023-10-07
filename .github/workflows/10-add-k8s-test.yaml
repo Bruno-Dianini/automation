@@ -4,7 +4,7 @@ name: 10 Build and Smoke Test
 on:
   push:
     branches:
-      - main
+      - none
   pull_request:
 
 jobs:
