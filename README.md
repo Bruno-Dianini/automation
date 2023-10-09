@@ -47,6 +47,6 @@ Cada job pode ter diferentes permissões, como permissões para ler ou gravar pa
 
 Todas as configurações do pipeline estão definidas no arquivo `.github/workflows/nome-do-arquivo.yml`. Você pode personalizar esse arquivo conforme necessário para atender aos requisitos específicos do seu projeto.
 
-## Contribuição
+### Contribuição
 
 Sinta-se à vontade para contribuir com melhorias ou correções para este pipeline. Abra um pull request e terei prazer em revisá-lo.
