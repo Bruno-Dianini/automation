@@ -76,8 +76,8 @@ jobs:
             --docker-password=${{ secrets.GIT_TOKEN }}
           export TESTING_IMAGE=dianini/automation:"$GITHUB_RUN_ID"
           envsubst < manifests/deployment.yaml  | kubectl apply -f -
-          kubectl rollout status deployment myapp
-          kubectl exec deploy/myapp -- curl --fail localhost
+          kubectl rollout status deployment app
+          kubectl exec deploy/app -- curl --fail localhost
 #NEW: (END) ############################################################  
 
       - name: Docker Metadata for Final Image Build
